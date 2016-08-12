@@ -31,10 +31,10 @@ File.open('EIJIRO/EIJI-1441.TXT', 'r:CP932:UTF-8') do |file|
 
     if !current
       # replace
-      current = {}
-      current[:entry] = entry
-      current[:contents] = []
-      current[:contents] << [pos, content]
+      current = {
+        entry: entry,
+        contents: [[pos, content]]
+      }
     elsif current[:entry] == entry
       # append
       current[:contents] << [pos, content]
@@ -56,10 +56,10 @@ File.open('EIJIRO/EIJI-1441.TXT', 'r:CP932:UTF-8') do |file|
       end
       puts(lines.join('\n'))
       # replace
-      current = {}
-      current[:entry] = entry
-      current[:contents] = []
-      current[:contents] << [pos, content]
+      current = {
+        entry: entry,
+        contents: [[pos, content]]
+      }
     end
   end
 end
