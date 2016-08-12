@@ -23,7 +23,7 @@ File.open('EIJIRO/EIJI-1441.TXT', 'r:CP932:UTF-8') do |file|
     content << "<span size=\"x-small\">※#{note}</span>" if note
     examples.each do |ex, ex_note|
       content << "<span size=\"small\">・#{ex}</span>"
-      content << "<span size=\"small\">#{ex_note}" if ex_note
+      content << "<span size=\"small\">#{ex_note}</span>" if ex_note
     end
 
     if !current
