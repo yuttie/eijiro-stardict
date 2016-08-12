@@ -11,7 +11,9 @@ File.open('EIJIRO/EIJI-1441.TXT', 'r:CP932:UTF-8') do |file|
     line.gsub!('〔', '（')
     line.gsub!('〕', '）')
     item, desc = line.split(' : ', 2)
-    _, entry, _, pos = /^■(.+?)( +\{([^{}]+)\})?$/.match(item).to_a
+    item =~ /^■(.+?)(?: +\{([^{}]+)\})?$/
+    entry = $1
+    pos = $2
     next if desc == ''
     desc2, *examples = desc.split('■・')
     examples.map! do |ex|
