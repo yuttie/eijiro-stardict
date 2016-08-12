@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 # -*- coding: utf-8 -*-
-require 'rubygems'
-require 'bundler/setup'
 
 current = nil
 File.open('EIJIRO/EIJI-1441.TXT', 'r:CP932:UTF-8') do |file|
