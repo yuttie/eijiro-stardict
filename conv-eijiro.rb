@@ -59,15 +59,13 @@ current_entry = nil
 ARGF.each_line do |line|
   entry = parse_entry(line)
   next if entry.nil?
-  word = entry[:word]
-  pos, content = entry[:descs].first
 
   if !current_entry
     # replace
     current_entry = entry
-  elsif current_entry[:word] == word
+  elsif current_entry[:word] == entry[:word]
     # append
-    current_entry[:descs] << [pos, content]
+    current_entry[:descs] << entry[:descs].first
   else
     # output
     print_entry(current_entry)
