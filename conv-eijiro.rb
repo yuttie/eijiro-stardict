@@ -10,6 +10,7 @@ def parse_entry(line)
   line.gsub!('>', '&gt;')
   line.gsub!('〔', '（')
   line.gsub!('〕', '）')
+  line.gsub!(/｛.+?｝/, '')
   item, desc = line.split(' : ', 2)
   return nil if desc == ''
   item =~ /^■(.+?)(?: +\{([^{}]+)\})?$/
@@ -20,8 +21,6 @@ def parse_entry(line)
     ex.split('◆')
   end
   desc3, note = desc2.split('◆')
-  desc3.gsub!(/｛.+?｝/, '')
-  note.gsub!(/｛.+?｝/, '') if note
 
   content = []
   content << desc3
