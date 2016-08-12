@@ -65,7 +65,12 @@ ARGF.each_line do |line|
     current_entry = entry
   elsif current_entry[:word] == entry[:word]
     # append
-    current_entry[:descs] << entry[:descs].first
+    if entry[:descs].first[0]
+      current_entry[:descs].push(entry[:descs].first)
+    else
+      i = current_entry[:descs].find_index { |desc| desc[0] } || 0
+      current_entry[:descs].insert(i, entry[:descs].first)
+    end
   else
     # output
     print_entry(current_entry)
