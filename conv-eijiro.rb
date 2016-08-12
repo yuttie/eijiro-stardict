@@ -44,7 +44,7 @@ File.open('EIJIRO/EIJI-1441.TXT', 'r:CP932:UTF-8') do |file|
       # output
       print("#{current[:entry]}\t")
       lines = []
-      current[:contents].each do |pos, content| 
+      current[:contents].each do |pos, content|
         if pos
           lines << "<span weight=\"bold\">〔#{pos}〕</span>#{content[0]}" if pos
           content[1..-1].each do |c|
