@@ -40,20 +40,19 @@ end
 
 def print_entry(entry)
     print("#{entry[:word]}\t")
-    lines = []
     entry[:descs].each do |pos, content|
       if pos
-        lines << "<span weight=\"bold\">〔#{pos}〕</span>#{content[0]}" if pos
+        print("<span weight=\"bold\">〔#{pos}〕</span>#{content[0]}\\n") if pos
         content[1..-1].each do |c|
-          lines << "\t#{c}"
+          print("\t#{c}\\n")
         end
       else
         content.each do |c|
-          lines << "#{c}"
+          print("#{c}\\n")
         end
       end
     end
-    puts(lines.join('\n'))
+    print("\n")
 end
 
 
