@@ -3,7 +3,7 @@
 
 ARGF.set_encoding('CP932:UTF-8')
 
-def parse(line)
+def parse_entry(line)
   line.chomp!
   line.gsub!('\\', '¥')
   line.gsub!('<', '&lt;')
@@ -58,7 +58,7 @@ end
 
 current_entry = nil
 ARGF.each_line do |line|
-  entry = parse(line)
+  entry = parse_entry(line)
   next if entry.nil?
   word = entry[:word]
   pos, content = entry[:descs].first
