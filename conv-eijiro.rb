@@ -13,7 +13,7 @@ def parse(line)
   item, desc = line.split(' : ', 2)
   return nil if desc == ''
   item =~ /^■(.+?)(?: +\{([^{}]+)\})?$/
-  entry = $1
+  word = $1
   pos = $2
   desc2, *examples = desc.split('■・')
   examples.map! do |ex|
@@ -31,28 +31,33 @@ def parse(line)
     content << "<span size=\"small\"><span color=\"#FFFFFF00\">• </span>#{ex_note}</span>" if ex_note
   end
 
-  [entry, pos, content]
+  {
+    word: word,
+    descs: [[pos, content]],
+  }
 end
 
-current = nil
+current_entry = nil
 ARGF.each_line do |line|
-  entry, pos, content = parse(line)
+  entry = parse(line)
   next if entry.nil?
+  word = entry[:word]
+  pos, content = entry[:descs].first
 
-  if !current
+  if !current_entry
     # replace
-    current = {
-      entry: entry,
+    current_entry = {
+      word: word,
       contents: [[pos, content]]
     }
-  elsif current[:entry] == entry
+  elsif current_entry[:word] == word
     # append
-    current[:contents] << [pos, content]
+    current_entry[:contents] << [pos, content]
   else
     # output
-    print("#{current[:entry]}\t")
+    print("#{current_entry[:word]}\t")
     lines = []
-    current[:contents].each do |pos, content|
+    current_entry[:contents].each do |pos, content|
       if pos
         lines << "<span weight=\"bold\">〔#{pos}〕</span>#{content[0]}" if pos
         content[1..-1].each do |c|
@@ -66,8 +71,8 @@ ARGF.each_line do |line|
     end
     puts(lines.join('\n'))
     # replace
-    current = {
-      entry: entry,
+    current_entry = {
+      word: word,
       contents: [[pos, content]]
     }
   end
