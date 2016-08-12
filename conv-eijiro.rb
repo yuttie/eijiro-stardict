@@ -46,18 +46,15 @@ ARGF.each_line do |line|
 
   if !current_entry
     # replace
-    current_entry = {
-      word: word,
-      contents: [[pos, content]]
-    }
+    current_entry = entry
   elsif current_entry[:word] == word
     # append
-    current_entry[:contents] << [pos, content]
+    current_entry[:descs] << [pos, content]
   else
     # output
     print("#{current_entry[:word]}\t")
     lines = []
-    current_entry[:contents].each do |pos, content|
+    current_entry[:descs].each do |pos, content|
       if pos
         lines << "<span weight=\"bold\">〔#{pos}〕</span>#{content[0]}" if pos
         content[1..-1].each do |c|
@@ -71,9 +68,6 @@ ARGF.each_line do |line|
     end
     puts(lines.join('\n'))
     # replace
-    current_entry = {
-      word: word,
-      contents: [[pos, content]]
-    }
+    current_entry = entry
   end
 end
