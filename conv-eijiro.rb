@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 current = nil
-File.open('EIJIRO/EIJI-1441.TXT', 'r:CP932:UTF-8') do |file|
+File.open(ARGV[0], 'r:CP932:UTF-8') do |file|
   file.each_line do |line|
     line.chomp!
     line.gsub!('\\', '¥')
