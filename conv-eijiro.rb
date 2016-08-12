@@ -37,6 +37,26 @@ def parse(line)
   }
 end
 
+
+def print_entry(entry)
+    print("#{entry[:word]}\t")
+    lines = []
+    entry[:descs].each do |pos, content|
+      if pos
+        lines << "<span weight=\"bold\">〔#{pos}〕</span>#{content[0]}" if pos
+        content[1..-1].each do |c|
+          lines << "\t#{c}"
+        end
+      else
+        content.each do |c|
+          lines << "#{c}"
+        end
+      end
+    end
+    puts(lines.join('\n'))
+end
+
+
 current_entry = nil
 ARGF.each_line do |line|
   entry = parse(line)
@@ -52,21 +72,7 @@ ARGF.each_line do |line|
     current_entry[:descs] << [pos, content]
   else
     # output
-    print("#{current_entry[:word]}\t")
-    lines = []
-    current_entry[:descs].each do |pos, content|
-      if pos
-        lines << "<span weight=\"bold\">〔#{pos}〕</span>#{content[0]}" if pos
-        content[1..-1].each do |c|
-          lines << "\t#{c}"
-        end
-      else
-        content.each do |c|
-          lines << "#{c}"
-        end
-      end
-    end
-    puts(lines.join('\n'))
+    print_entry(current_entry)
     # replace
     current_entry = entry
   end
