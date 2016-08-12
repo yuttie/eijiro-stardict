@@ -3,8 +3,7 @@
 
 ARGF.set_encoding('CP932:UTF-8')
 
-current = nil
-ARGF.each_line do |line|
+def parse(line)
   line.chomp!
   line.gsub!('\\', '¥')
   line.gsub!('<', '&lt;')
@@ -12,7 +11,7 @@ ARGF.each_line do |line|
   line.gsub!('〔', '（')
   line.gsub!('〕', '）')
   item, desc = line.split(' : ', 2)
-  next if desc == ''
+  return nil if desc == ''
   item =~ /^■(.+?)(?: +\{([^{}]+)\})?$/
   entry = $1
   pos = $2
@@ -31,6 +30,14 @@ ARGF.each_line do |line|
     content << "<span size=\"small\">• #{ex}</span>"
     content << "<span size=\"small\"><span color=\"#FFFFFF00\">• </span>#{ex_note}</span>" if ex_note
   end
+
+  [entry, pos, content]
+end
+
+current = nil
+ARGF.each_line do |line|
+  entry, pos, content = parse(line)
+  next if entry.nil?
 
   if !current
     # replace
