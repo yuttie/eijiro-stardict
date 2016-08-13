@@ -1,12 +1,14 @@
 Tool for converting Eijiro dictionary into StarDict one
 =======================================================
 
+
 Requirements
 ------------
 
 - StarDict tools
 - Ruby 2.0 or above
 - dictzip
+
 
 Usage
 -----
@@ -19,3 +21,9 @@ $ unzip /path/to/EDP-1441.zip
 $ make
 $ make install
 ~~~
+
+
+TODO
+----
+
+[ ] Output in the XDXF markup language will be better than the current Pango markup for portability and expressiveness.
