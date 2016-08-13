@@ -2,6 +2,9 @@ Tool for converting Eijiro dictionary into StarDict one
 =======================================================
 
 
+![Screenshot](screenshot.png)
+
+
 Requirements
 ------------
 
