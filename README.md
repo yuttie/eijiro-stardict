@@ -30,3 +30,9 @@ TODO
 ----
 
 [ ] Output in the XDXF markup language will be better than the current Pango markup for portability and expressiveness.
+
+
+License
+-------
+
+MIT License
