@@ -26,8 +26,8 @@ def parse_entry(line)
   content << desc3
   content << "<span size=\"x-small\">※#{note}</span>" if note
   examples.each do |ex, ex_note|
-    content << "<span size=\"small\">• #{ex}</span>"
-    content << "<span size=\"small\"><span color=\"#FFFFFF00\">• </span>#{ex_note}</span>" if ex_note
+    content << "<span size=\"small\" color=\"#7F7F7F\">• #{ex}</span>"
+    content << "<span size=\"small\" color=\"#7F7F7F\"><span color=\"#FFFFFF00\">• </span>#{ex_note}</span>" if ex_note
   end
 
   {
